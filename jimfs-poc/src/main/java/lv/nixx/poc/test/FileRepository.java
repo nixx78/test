@@ -4,13 +4,17 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collection;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FileRepository {
 
-    void create(Path path, String fileName) {
+    Path create(Path path, String fileName) {
         Path filePath = path.resolve(fileName);
         try {
-            Files.createFile(filePath);
+            return Files.createFile(filePath);
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
         }
@@ -38,6 +42,23 @@ public class FileRepository {
             Files.deleteIfExists(path);
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
+        }
+    }
+
+    Path createFileWithContent(Path path, String fileName, String content) {
+        final Path p = create(path, fileName);
+        update(p, content);
+
+        return p;
+    }
+
+    public Collection<String> getPathContent(Path path, int depth) throws IOException {
+        try (Stream<Path> stream = Files.walk(path, depth)) {
+            return stream
+                    .filter(file -> !Files.isDirectory(file))
+                    .map(Path::getFileName)
+                    .map(Path::toString)
+                    .collect(Collectors.toSet());
         }
     }
 
