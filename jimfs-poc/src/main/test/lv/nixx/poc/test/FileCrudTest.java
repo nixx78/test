@@ -2,7 +2,6 @@ package lv.nixx.poc.test;
 
 import com.google.common.jimfs.Configuration;
 import com.google.common.jimfs.Jimfs;
-import com.google.common.jimfs.PathType;
 import org.junit.Test;
 
 import java.io.IOException;
