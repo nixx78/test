@@ -5,7 +5,7 @@ import net.jqwik.api.*;
 import static org.junit.Assert.assertEquals;
 
 @Label("Property based testing sandbox")
-public class JqwikSandbox {
+class JqwikSandbox {
 
     @Data
     Iterable<Tuple.Tuple2<String, String>> testData() {
@@ -31,7 +31,7 @@ public class JqwikSandbox {
     }
 
     @Property
-    public boolean numbersTest(@ForAll("2 to 8") Integer i) {
+    boolean numbersTest(@ForAll("2 to 8") Integer i) {
         System.out.println("Input number:" + i);
         return i > 0;
     }

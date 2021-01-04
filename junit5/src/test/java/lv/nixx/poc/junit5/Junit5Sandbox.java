@@ -8,7 +8,7 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Junit5Sandbox {
+class Junit5Sandbox {
 
     @Test
     void testFailWithTimeout()  {
@@ -16,10 +16,8 @@ public class Junit5Sandbox {
     }
 
     @Test
-    public void assumptionSample() {
-        Assumptions.assumingThat("1".equals("1"), () -> {
-            assertEquals("1","1");
-        });
+    void assumptionSample() {
+        Assumptions.assumingThat("1".equals("1"), () -> assertEquals("1","1"));
 
     }
 
