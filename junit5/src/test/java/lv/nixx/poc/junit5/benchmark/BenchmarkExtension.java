@@ -1,13 +1,13 @@
-package lv.nixx.poc.junit5;
+package lv.nixx.poc.junit5.benchmark;
+
+import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
+import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
-import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
-import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
-import org.junit.jupiter.api.extension.ExtensionContext;
 
 public class BenchmarkExtension implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
 	
