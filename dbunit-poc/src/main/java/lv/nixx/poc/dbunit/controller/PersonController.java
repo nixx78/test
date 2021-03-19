@@ -11,7 +11,7 @@ import java.util.Collection;
 @RestController
 public class PersonController {
 
-    private PersonDAO dao;
+    private final PersonDAO dao;
 
     @Autowired
     public PersonController(PersonDAO dao) {

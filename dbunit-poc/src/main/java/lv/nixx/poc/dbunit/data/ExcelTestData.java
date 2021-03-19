@@ -15,21 +15,16 @@ import javax.sql.DataSource;
 import java.io.File;
 
 @Service
-public class ExcelTestData {
-
-    private DataSource dataSource;
+public class ExcelTestData extends MockData {
 
     @Autowired
     public ExcelTestData(DataSource dataSource) {
-        this.dataSource = dataSource;
+        super(dataSource);
     }
 
-    public void load() throws Exception {
-        IDatabaseConnection con = new DatabaseConnection(dataSource.getConnection());
-
+    @Override
+    void load(IDatabaseConnection connection) throws Exception {
         XlsDataSet testData = new XlsDataSet(new File("./src/main/resources/test_data/test_data_from_excel.xls"));
-        DatabaseOperation.CLEAN_INSERT.execute(con, testData);
-
+        DatabaseOperation.CLEAN_INSERT.execute(connection, testData);
     }
-
 }

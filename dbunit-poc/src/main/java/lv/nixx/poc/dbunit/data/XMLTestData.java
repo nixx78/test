@@ -1,6 +1,5 @@
 package lv.nixx.poc.dbunit.data;
 
-import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
@@ -11,23 +10,20 @@ import org.springframework.stereotype.Service;
 import javax.sql.DataSource;
 
 @Service
-public class XMLTestData {
-
-    private DataSource dataSource;
+public class XMLTestData extends MockData {
 
     @Autowired
     public XMLTestData(DataSource dataSource) {
-        this.dataSource = dataSource;
+        super(dataSource);
     }
 
-    public void load() throws Exception {
+    @Override
+    void load(IDatabaseConnection connection) throws Exception {
         FlatXmlDataSet testData = new FlatXmlDataSetBuilder().build(getClass()
                 .getClassLoader()
                 .getResourceAsStream("test_data/xml_test_data.xml"));
 
-        IDatabaseConnection con = new DatabaseConnection(dataSource.getConnection());
-        DatabaseOperation.CLEAN_INSERT.execute(con, testData);
-
+        DatabaseOperation.CLEAN_INSERT.execute(connection, testData);
     }
 
 }
