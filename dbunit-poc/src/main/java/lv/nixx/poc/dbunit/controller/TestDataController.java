@@ -11,23 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+import static lv.nixx.poc.dbunit.controller.Source.*;
+
 @RestController
 public class TestDataController {
 
-    private final Map<String, MockData> mockDataMap;
+    private final Map<Source, MockData> mockDataMap;
 
     @Autowired
     public TestDataController(XMLTestData xmlTestData, ExcelTestData excelTestData, CSVTestData csvTestData) {
 
         mockDataMap = Map.of(
-                "xml", xmlTestData,
-                "excel", excelTestData,
-                "csv", csvTestData
+                XML, xmlTestData,
+                EXCEL, excelTestData,
+                CSV, csvTestData
         );
     }
 
     @GetMapping("/person/load/{source}")
-    public void loadMockData(@PathVariable String source) throws Exception {
+    public void loadMockData(@PathVariable Source source) throws Exception {
         MockData mockData = mockDataMap.get(source);
 
         if (mockData == null) {

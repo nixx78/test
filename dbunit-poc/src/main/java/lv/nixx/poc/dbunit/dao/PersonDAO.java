@@ -1,6 +1,5 @@
 package lv.nixx.poc.dbunit.dao;
 
-import lv.nixx.poc.dbunit.dao.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -22,7 +21,7 @@ public class PersonDAO {
     }
 
     public Collection<Person> getAllPersons() {
-        return jdbcTemplate.query("Select * from Person", new PMapper());
+        return jdbcTemplate.query("Select * from Person_tbl", new PMapper());
     }
 
     static class PMapper implements RowMapper<Person> {
