@@ -3,4 +3,8 @@
     <PERSON_TBL id='1' name='Name1' surname='Surname1'/>
     <PERSON_TBL id='2' name='Name2' surname='Surname2'/>
     <PERSON_TBL id='3' name='Name3' surname='Surname3'/>
+
+    <ADDRESS_TBL person_id='1' line='line1'/>
+    <ADDRESS_TBL person_id='1' line='line2'/>
+    <ADDRESS_TBL person_id='1' line='line3'/>
 </dataset>
