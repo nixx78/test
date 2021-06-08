@@ -2,8 +2,8 @@ package lv.nixx.poc.cucumber.stepdef;
 
 import java.util.Collection;
 
-import lv.nixx.poc.cucumber.transaction.Transaction;
-import lv.nixx.poc.cucumber.transaction.TransactionReport;
+import lv.nixx.poc.cucumber.domain.Transaction;
+import lv.nixx.poc.cucumber.domain.TransactionReport;
 
 public class TransactionTestContext {
 	

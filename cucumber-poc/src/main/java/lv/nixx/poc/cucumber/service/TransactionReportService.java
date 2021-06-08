@@ -1,4 +1,4 @@
-package lv.nixx.poc.cucumber.transaction;
+package lv.nixx.poc.cucumber.service;
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.math.BigDecimal.*;
@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lv.nixx.poc.cucumber.domain.*;
 
 public class TransactionReportService {
 
@@ -58,7 +59,7 @@ public class TransactionReportService {
 
 		return txns.stream().collect(
 				groupingBy(t -> getMonthFromDate(t.getDate()),   
-				groupingBy(Transaction::getCurrency, new StaticsticCollector()))
+				groupingBy(Transaction::getCurrency, new StatisticCollector()))
 				);
 	}
 
@@ -67,20 +68,20 @@ public class TransactionReportService {
 		return localDate.getMonth().toString();
 	}
 
-	class StaticsticCollector implements Collector<Transaction, StatisticAcamullator, MonthStatistic> {
+	static class StatisticCollector implements Collector<Transaction, StatisticAccumulator, MonthStatistic> {
 
 		@Override
-		public Supplier<StatisticAcamullator> supplier() {
-			return StatisticAcamullator::new;
+		public Supplier<StatisticAccumulator> supplier() {
+			return StatisticAccumulator::new;
 		}
 
 		@Override
-		public BiConsumer<StatisticAcamullator, Transaction> accumulator() {
-			return (s, t) -> s.increaseByTransaction(t);
+		public BiConsumer<StatisticAccumulator, Transaction> accumulator() {
+			return StatisticAccumulator::increaseByTransaction;
 		}
 
 		@Override
-		public BinaryOperator<StatisticAcamullator> combiner() {
+		public BinaryOperator<StatisticAccumulator> combiner() {
 			return (s1, s2) -> s1;
 		}
 
@@ -90,16 +91,16 @@ public class TransactionReportService {
 		}
 
 		@Override
-		public Function<StatisticAcamullator, MonthStatistic> finisher() {
+		public Function<StatisticAccumulator, MonthStatistic> finisher() {
 			return t -> new MonthStatistic(t.getCurrency(), t.getTxnCount(), t.getAmount());
 		}
 
-	};
+	}
 
 	@NoArgsConstructor
 	@ToString
 	@Getter
-	class StatisticAcamullator {
+	static class StatisticAccumulator {
 		private String currency;
 		private int txnCount = 0;
 		private BigDecimal amount = ZERO;

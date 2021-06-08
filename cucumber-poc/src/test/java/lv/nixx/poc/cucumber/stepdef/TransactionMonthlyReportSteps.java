@@ -25,10 +25,10 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import lv.nixx.poc.cucumber.transaction.MonthStatistic;
-import lv.nixx.poc.cucumber.transaction.Transaction;
-import lv.nixx.poc.cucumber.transaction.TransactionDao;
-import lv.nixx.poc.cucumber.transaction.TransactionReportService;
+import lv.nixx.poc.cucumber.domain.MonthStatistic;
+import lv.nixx.poc.cucumber.domain.Transaction;
+import lv.nixx.poc.cucumber.service.TransactionDao;
+import lv.nixx.poc.cucumber.service.TransactionReportService;
 
 public class TransactionMonthlyReportSteps {
 	
@@ -41,7 +41,7 @@ public class TransactionMonthlyReportSteps {
 	@Mock
 	private TransactionDao dao;
 	
-	private TransactionTestContext transactionTestContext;
+	private final TransactionTestContext transactionTestContext;
 	
 	public TransactionMonthlyReportSteps(TransactionTestContext transactionTestContext) {
 		this.transactionTestContext = transactionTestContext;
@@ -53,7 +53,7 @@ public class TransactionMonthlyReportSteps {
 	}
 
 	@Given("^transaction service is available")
-	public void transactionServiceCreated() throws Throwable {
+	public void transactionServiceCreated() {
 		System.out.println("TransactionMonthlyReportSteps:transactionServiceCreated");
 		Collection<Transaction> txn = transactionTestContext.txns;
 		
@@ -79,7 +79,7 @@ public class TransactionMonthlyReportSteps {
 		
 		for (Map<String, String> row : table.asMaps(String.class, String.class)) {
 			final String curr = row.get("currency");
-			final int expectedCount = new Integer(row.get("count"));
+			final int expectedCount = Integer.parseInt(row.get("count"));
 			final BigDecimal expectedAmount = new BigDecimal(row.get("amount"));
 			
 			MonthStatistic currStat = actualMonth.get(curr);

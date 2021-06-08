@@ -25,11 +25,11 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import lv.nixx.poc.cucumber.transaction.CountBy;
-import lv.nixx.poc.cucumber.transaction.Transaction;
-import lv.nixx.poc.cucumber.transaction.TransactionDao;
-import lv.nixx.poc.cucumber.transaction.TransactionReport;
-import lv.nixx.poc.cucumber.transaction.TransactionReportService;
+import lv.nixx.poc.cucumber.domain.CountBy;
+import lv.nixx.poc.cucumber.domain.Transaction;
+import lv.nixx.poc.cucumber.service.TransactionDao;
+import lv.nixx.poc.cucumber.domain.TransactionReport;
+import lv.nixx.poc.cucumber.service.TransactionReportService;
 
 public class TransactionReportSteps {
 	
@@ -40,7 +40,7 @@ public class TransactionReportSteps {
 	@Mock
 	private TransactionDao dao;
 	
-	private TransactionTestContext transactionTestContext;
+	private final TransactionTestContext transactionTestContext;
 	
 	public TransactionReportSteps(TransactionTestContext transactionTestContext) {
 		this.transactionTestContext = transactionTestContext;
@@ -52,7 +52,7 @@ public class TransactionReportSteps {
 	}
 
 	@Given("^Transaction report service is available$")
-	public void transactionServiceCreated() throws Throwable {
+	public void transactionServiceCreated() {
 		
 		System.out.println("Transaction report service is available$$$$$");
 
@@ -87,10 +87,10 @@ public class TransactionReportSteps {
 
 			BigDecimal bd = null;
 			if (actualReport.getCountField() == CountBy.Count) {
-				Long v = Long.valueOf(expectedCount);
+				long v = Long.parseLong(expectedCount);
 				bd = BigDecimal.valueOf(v);
 			} else if (actualReport.getCountField() == CountBy.Amount) {
-				Double v = Double.valueOf(expectedCount);
+				double v = Double.parseDouble(expectedCount);
 				bd = BigDecimal.valueOf(v);
 			}
 			

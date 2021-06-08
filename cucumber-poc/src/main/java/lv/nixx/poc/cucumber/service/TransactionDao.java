@@ -1,4 +1,6 @@
-package lv.nixx.poc.cucumber.transaction;
+package lv.nixx.poc.cucumber.service;
+
+import lv.nixx.poc.cucumber.domain.Transaction;
 
 import java.util.Collection;
 import java.util.Collections;

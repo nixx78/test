@@ -11,12 +11,12 @@ public class ServiceSteps {
 
 	Service service;
 
-	@Given("^Service is avaliable$")
-	public void service_is_avaliable() throws Throwable {
+	@Given("^Service is available$")
+	public void service_is_available() {
 		service = new Service();
 	}
 
-	@When("User (.*) is login succesfully")
+	@When("User (.*) is login successfully")
 	public void userIsLoggedIn(String user) {
 	}
 

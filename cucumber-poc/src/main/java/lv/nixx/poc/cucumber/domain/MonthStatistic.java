@@ -1,4 +1,4 @@
-package lv.nixx.poc.cucumber.transaction;
+package lv.nixx.poc.cucumber.domain;
 
 import java.math.BigDecimal;
 

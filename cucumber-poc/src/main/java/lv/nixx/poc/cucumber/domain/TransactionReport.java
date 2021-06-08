@@ -1,4 +1,4 @@
-package lv.nixx.poc.cucumber.transaction;
+package lv.nixx.poc.cucumber.domain;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class TransactionReport {
 
-	private CountBy countField;
+	private final CountBy countField;
 	private Map<String, BigDecimal> currency = new HashMap<>();
 	private int totalOperationCount;
 

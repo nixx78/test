@@ -11,11 +11,11 @@ import java.util.Map;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
-import lv.nixx.poc.cucumber.transaction.Transaction;
+import lv.nixx.poc.cucumber.domain.Transaction;
 
 public class GenericTransactionReportSteps {
 
-	TransactionTestContext transactionTestContext;
+	final TransactionTestContext transactionTestContext;
 	
 	public GenericTransactionReportSteps(TransactionTestContext transactionTestContext) {
 		this.transactionTestContext = transactionTestContext;
@@ -26,8 +26,8 @@ public class GenericTransactionReportSteps {
 		Collection<Transaction> c = new ArrayList<>();
 		for (Map<String, String> row : table.asMaps(String.class, String.class)) {
 			Transaction t = new Transaction();
-			t.setId(Long.valueOf(row.get("id")));
-			t.setAmount(BigDecimal.valueOf(Double.valueOf(row.get("amount"))));
+			t.setId(Long.parseLong(row.get("id")));
+			t.setAmount(BigDecimal.valueOf(Double.parseDouble(row.get("amount"))));
 			t.setCurrency(row.get("currency"));
 			try {
 				t.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(row.get("date")));

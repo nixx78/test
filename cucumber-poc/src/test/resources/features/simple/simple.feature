@@ -7,15 +7,15 @@ Feature: Service test
       | user3 | password3 |
 
   Scenario: Login and calculate
-    Given Service is avaliable
-    When User user1 is login succesfully
+    Given Service is available
+    When User user1 is login successfully
     Then Calculate: 1 + 2 expected 3
     Then Calculate: 4 + 2 expected 6
     Then Calculate: 4 + 4 expected 8
 
   Scenario Outline: Login and calculate using table
-    Given Service is avaliable
-    When User user1 is login succesfully
+    Given Service is available
+    When User user1 is login successfully
     Then Calculate: <a> + <b> expected <result>
 
     Examples: 
