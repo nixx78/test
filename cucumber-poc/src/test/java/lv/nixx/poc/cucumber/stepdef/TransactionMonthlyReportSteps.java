@@ -51,7 +51,7 @@ public class TransactionMonthlyReportSteps {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Given("^transaction service is available")
+    @Given("transaction service is available")
     public void transactionServiceCreated() {
         System.out.println("TransactionMonthlyReportSteps:transactionServiceCreated");
         Collection<Transaction> txn = transactionTestContext.txns;

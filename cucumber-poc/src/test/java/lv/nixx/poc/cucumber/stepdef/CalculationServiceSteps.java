@@ -5,18 +5,18 @@ import static org.junit.Assert.assertEquals;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import lv.nixx.poc.cucumber.service.Service;
+import lv.nixx.poc.cucumber.service.CalculationService;
 
 import java.util.List;
 import java.util.Map;
 
-public class ServiceSteps {
+public class CalculationServiceSteps {
 
-    Service service;
+    CalculationService calculationService;
 
-    @Given("^Service is available$")
+    @Given("Service is available")
     public void service_is_available() {
-        service = new Service();
+        calculationService = new CalculationService();
     }
 
     @Given("Users with passwords exists:")
@@ -29,9 +29,9 @@ public class ServiceSteps {
         System.out.println("User login: " + user);
     }
 
-    @Then("^Calculate: (\\d+) \\+ (\\d+) expected (\\d+)$")
+    @Then("Calculate: {int} + {int} expected {int}")
     public void calculate(int a, int b, int r) {
-        assertEquals(r, service.calculate(a, b));
+        assertEquals("Calculate wrong result", r, calculationService.calculate(a, b));
     }
 
 }

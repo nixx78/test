@@ -14,4 +14,5 @@ Feature: Transaction report service test count by Amount
     	|currency|count		|
     	|USD	 |10.0		|
     	|EUR	 |40.04		|
-    Then expect total transaction count 3	
+    Then expect total transaction count 3
+    Then expect total amount 50.04

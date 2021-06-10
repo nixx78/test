@@ -2,7 +2,7 @@ package lv.nixx.poc.cucumber.service;
 
 import java.util.Collection;
 
-public class Service {
+public class CalculationService {
 	
 	public void login(String user, String password) {
 		if ( !user.equalsIgnoreCase("user1") && password.equalsIgnoreCase("pass1") ) {

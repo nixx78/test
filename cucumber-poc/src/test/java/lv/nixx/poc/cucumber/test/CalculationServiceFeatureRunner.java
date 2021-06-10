@@ -9,5 +9,5 @@ import org.junit.runner.RunWith;
 		features = "src/test/resources/features/simple", 
 		plugin = { "pretty", "html:target/cucumber/simple.html" },
 		glue = "lv.nixx.poc.cucumber.stepdef")
-public class SimpleFeatureRunnerTest {
+public class CalculationServiceFeatureRunner {
 }

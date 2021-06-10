@@ -1,6 +1,7 @@
 package lv.nixx.poc.cucumber.stepdef;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -68,7 +69,7 @@ public class TransactionReportSteps {
 		this.transactionTestContext.actualReport = report;
 	}
 	
-	@Then("^expect report with following data:$")
+	@Then("expect report with following data:")
 	public void checkReportRows(List<Map<String, String>> table) {
 		
 		Map<String, BigDecimal> expectedCounts = new HashMap<>();
@@ -94,14 +95,18 @@ public class TransactionReportSteps {
 		
 		assertThat(actualCounts.entrySet(), equalTo(expectedCounts.entrySet()));
 	}
-	
-		   
-	@Then("^expect total transaction count (\\d+)$")
+
+	@Then("expect total transaction count {int}")
 	public void checkTotal(int count) {
 		TransactionReport actualReport = this.transactionTestContext.actualReport;
-		assertEquals(count, actualReport.getTotalOperationCount());
+		assertEquals("Incorrect transaction count", count, actualReport.getTotalOperationCount());
 	}
-	
+
+	@Then("expect total amount {bigdecimal}")
+	public void totalAmountExpect(BigDecimal totalAmount) {
+		TransactionReport actualReport = this.transactionTestContext.actualReport;
+		assertThat("Incorrect total amount", actualReport.getTotalAmount(), comparesEqualTo(totalAmount));
+	}
 
 }
 
