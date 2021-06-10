@@ -10,21 +10,17 @@ import static org.mockito.Mockito.any;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+import io.cucumber.java.Before;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 
-import cucumber.api.DataTable;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import lv.nixx.poc.cucumber.domain.CountBy;
 import lv.nixx.poc.cucumber.domain.Transaction;
 import lv.nixx.poc.cucumber.service.TransactionDao;
@@ -53,9 +49,6 @@ public class TransactionReportSteps {
 
 	@Given("^Transaction report service is available$")
 	public void transactionServiceCreated() {
-		
-		System.out.println("Transaction report service is available$$$$$");
-
 		service = new TransactionReportService();
 		Collection<Transaction> txn = transactionTestContext.txns;
 		doReturn(txn).when(dao).getTransactions(any(Date.class), any(Date.class));
@@ -76,12 +69,12 @@ public class TransactionReportSteps {
 	}
 	
 	@Then("^expect report with following data:$")
-	public void checkReportRows(DataTable table) {
+	public void checkReportRows(List<Map<String, String>> table) {
 		
 		Map<String, BigDecimal> expectedCounts = new HashMap<>();
 		TransactionReport actualReport = this.transactionTestContext.actualReport;
-		
-		for (Map<String, String> row : table.asMaps(String.class, String.class)) {
+
+		for (Map<String, String> row : table) {
 			final String curr = row.get("currency");
 			final String expectedCount = row.get("count");
 
