@@ -61,7 +61,7 @@ public class TransactionMonthlyReportSteps {
     }
 
 
-    @When("^create monthly report with date range: from \"([^\"]*)\" to \"([^\"]*)\"$")
+    @When("create monthly report with date range: from {string} to {string}")
     public void createReport(String dateFrom, String dateTo) throws ParseException {
         final DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Date df = format.parse(dateFrom);
@@ -71,7 +71,7 @@ public class TransactionMonthlyReportSteps {
         assertNotNull(this.actualReport);
     }
 
-    @Then("^expect report with following data for \\\"([^\\\"]*)\\\"$")
+    @Then("expect report with following data for {string}")
     public void checkReportMonth(String month, List<Map<String, String>> table) {
         Map<String, MonthStatistic> actualMonth = actualReport.get(month);
         assertNotNull("Data for month: " + month + "should exists", actualMonth);
