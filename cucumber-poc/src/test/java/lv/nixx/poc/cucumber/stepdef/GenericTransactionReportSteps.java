@@ -3,6 +3,8 @@ package lv.nixx.poc.cucumber.stepdef;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Given;
 import lv.nixx.poc.cucumber.domain.Transaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -11,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 public class GenericTransactionReportSteps {
+
+    private static final Logger log = LoggerFactory.getLogger(GenericTransactionReportSteps.class);
 
     final TransactionTestContext transactionTestContext;
 
@@ -30,7 +34,7 @@ public class GenericTransactionReportSteps {
     @Given("Transactions exists:")
     public void transactionsExists(List<Transaction> table) {
         transactionTestContext.txns = table;
-        System.out.println("Transactions exists: " + table);
+        log.info("Transactions exists: " + table);
     }
 
 }

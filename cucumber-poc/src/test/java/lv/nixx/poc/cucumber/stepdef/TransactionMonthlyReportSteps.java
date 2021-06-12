@@ -12,6 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -30,6 +32,8 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
 
 public class TransactionMonthlyReportSteps {
+
+    private static final Logger log = LoggerFactory.getLogger(TransactionMonthlyReportSteps.class);
 
     private Map<String, Map<String, MonthStatistic>> actualReport;
 
@@ -53,7 +57,7 @@ public class TransactionMonthlyReportSteps {
 
     @Given("transaction service is available")
     public void transactionServiceCreated() {
-        System.out.println("TransactionMonthlyReportSteps:transactionServiceCreated");
+        log.info("TransactionMonthlyReportSteps:transactionServiceCreated");
         Collection<Transaction> txn = transactionTestContext.txns;
 
         doReturn(txn).when(dao).getTransactions(any(Date.class), any(Date.class));

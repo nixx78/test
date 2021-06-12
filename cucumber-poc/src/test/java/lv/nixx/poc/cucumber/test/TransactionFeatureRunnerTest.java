@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features = "src/test/resources/features/transaction", 
-		plugin = { "pretty", "html:target/cucumber/transaction/plain.html" },
+		plugin = { "pretty", "summary", "html:target/cucumber/transaction/plain.html" },
 		glue = "lv.nixx.poc.cucumber.stepdef")
-public class TransactionFeatureRunner {
+public class TransactionFeatureRunnerTest {
 }

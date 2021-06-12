@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -22,6 +24,8 @@ import static org.mockito.Mockito.doReturn;
 public class TransactionReportServiceTest {
 
     //TODO go throw definitions https://cucumber.io/docs/guides/10-minute-tutorial/
+    private static final Logger log = LoggerFactory.getLogger(TransactionReportServiceTest.class);
+
     @Spy
     @InjectMocks
     private TransactionReportService service;
@@ -51,10 +55,10 @@ public class TransactionReportServiceTest {
 
         for (Map.Entry<String, Map<String, MonthStatistic>> e : report.entrySet()) {
             String month = e.getKey();
-            System.out.println(month);
+            log.info(month);
             for (Map.Entry<String, MonthStatistic> monthStats : e.getValue().entrySet()) {
                 String currency = monthStats.getKey();
-                System.out.println("\t" + currency + "\n \t\t" + monthStats.getValue());
+                log.info("\t" + currency + "\n \t\t" + monthStats.getValue());
             }
         }
 

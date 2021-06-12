@@ -6,11 +6,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lv.nixx.poc.cucumber.service.CalculationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
 
 public class CalculationServiceSteps {
+
+    private static final Logger log = LoggerFactory.getLogger(CalculationServiceSteps.class);
 
     CalculationService calculationService;
 
@@ -26,7 +30,7 @@ public class CalculationServiceSteps {
 
     @When("User {string} is login successfully")
     public void userIsLoggedIn(String user) {
-        System.out.println("User login: " + user);
+        log.info("User login: " + user);
     }
 
     @Then("Calculate: {int} + {int} expected {int}")

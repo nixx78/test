@@ -9,5 +9,5 @@ import org.junit.runner.RunWith;
 		features = "src/test/resources/features/transaction/monthly", 
 		plugin = { "pretty", "html:target/cucumber/transaction/monthly.html" },
 		glue = "lv.nixx.poc.cucumber.stepdef")
-public class TransactionMonthlyFeatureRunner {
+public class TransactionMonthlyFeatureRunnerTest {
 }
