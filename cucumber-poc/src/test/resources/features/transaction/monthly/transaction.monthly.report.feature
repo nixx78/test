@@ -10,8 +10,6 @@ Feature: Transaction monthly report service test
       | 4  | EUR      | 3.75   | 03/10/2016 |
       | 5  | USD      | 5.8    | 02/10/2016 |
       | 6  | EUR      | 40.14  | 12/12/2016 |
-    Given transaction service is available
-
 
   Scenario: Create monthly transaction report
     When create monthly report with date range: from "01/01/2016" to "31/12/2016"

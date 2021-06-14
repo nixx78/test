@@ -23,7 +23,6 @@ import static org.mockito.Mockito.doReturn;
 @RunWith(MockitoJUnitRunner.class)
 public class TransactionReportServiceTest {
 
-    //TODO go throw definitions https://cucumber.io/docs/guides/10-minute-tutorial/
     private static final Logger log = LoggerFactory.getLogger(TransactionReportServiceTest.class);
 
     @Spy

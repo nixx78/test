@@ -3,6 +3,7 @@ package lv.nixx.poc.cucumber.stepdef;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Given;
 import lv.nixx.poc.cucumber.domain.Transaction;
+import lv.nixx.poc.cucumber.service.TransactionDaoImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,10 +17,10 @@ public class GenericTransactionReportSteps {
 
     private static final Logger log = LoggerFactory.getLogger(GenericTransactionReportSteps.class);
 
-    final TransactionTestContext transactionTestContext;
+    private final TransactionDaoImpl transactionDao;
 
-    public GenericTransactionReportSteps(TransactionTestContext transactionTestContext) {
-        this.transactionTestContext = transactionTestContext;
+    public GenericTransactionReportSteps(TransactionDaoImpl transactionDao) {
+        this.transactionDao = transactionDao;
     }
 
     @DataTableType
@@ -32,9 +33,9 @@ public class GenericTransactionReportSteps {
     }
 
     @Given("Transactions exists:")
-    public void transactionsExists(List<Transaction> table) {
-        transactionTestContext.txns = table;
-        log.info("Transactions exists: " + table);
+    public void transactionsExists(List<Transaction> expectedTransactions) {
+        transactionDao.setExpectedTransaction(expectedTransactions);
+        log.info("Transactions in DB: " + expectedTransactions);
     }
 
 }

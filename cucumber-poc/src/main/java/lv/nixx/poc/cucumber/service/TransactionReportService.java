@@ -26,12 +26,11 @@ import lv.nixx.poc.cucumber.domain.*;
 
 public class TransactionReportService {
 
-    private TransactionDao dao;
+    private final TransactionDao dao;
 
-    public void setDao(TransactionDao dao) {
+    public TransactionReportService(TransactionDao dao) {
         this.dao = dao;
     }
-
     public TransactionReport createReport(Date dateFrom, Date dateTo, CountBy countField) {
 
         Collector<Transaction, ?, BigDecimal> reducingFunction;
@@ -81,7 +80,7 @@ public class TransactionReportService {
 
         @Override
         public BiConsumer<StatisticAccumulator, Transaction> accumulator() {
-            return StatisticAccumulator::increaseByTransaction;
+            return StatisticAccumulator::add;
         }
 
         @Override
@@ -109,7 +108,7 @@ public class TransactionReportService {
         private int txnCount = 0;
         private BigDecimal amount = ZERO;
 
-        void increaseByTransaction(Transaction txn) {
+        void add(Transaction txn) {
             this.currency = txn.getCurrency();
             this.txnCount++;
             this.amount = this.amount.add(Optional.ofNullable(txn.getAmount()).orElse(ZERO));
