@@ -7,7 +7,6 @@ Feature: Transaction report service test
       | 2  | EUR      | 20.00  | 13/09/2018 |
       | 3  | EUR      | 20.00  | 13/09/2018 |
       | 4  | EUR      | 20.00  | 13/09/2018 |
-    Given Transaction report service is available
 
   Scenario: Create Transaction report for Count
     When create report with date range: from "10/09/2018" to "15/09/2018" and count by field "Count"
