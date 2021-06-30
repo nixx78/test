@@ -1,3 +1,4 @@
+@TestProfile1
 Feature: Transaction report service test count by Amount
 
   Background:

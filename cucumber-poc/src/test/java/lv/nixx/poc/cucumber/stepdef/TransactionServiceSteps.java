@@ -1,6 +1,8 @@
 package lv.nixx.poc.cucumber.stepdef;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lv.nixx.poc.cucumber.domain.Transaction;
@@ -13,6 +15,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +35,12 @@ public class TransactionServiceSteps {
 
     public TransactionServiceSteps(TransactionService transactionService) {
         this.transactionService = transactionService;
+    }
+
+    @Before
+    public void beforeStep(Scenario scenario) {
+        Collection<String> sourceTagNames = scenario.getSourceTagNames();
+        log.info("Scenario executed with tags: {}", sourceTagNames);
     }
 
     @When("request transactions from service for date: {string}")
