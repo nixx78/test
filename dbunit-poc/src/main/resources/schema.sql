@@ -2,6 +2,7 @@
    id INT NOT NULL PRIMARY KEY,
    name    VARCHAR(20) NOT NULL,
    surname VARCHAR(20) NOT NULL,
+   comment VARCHAR(20),
    submission_date DATE,
 );
 

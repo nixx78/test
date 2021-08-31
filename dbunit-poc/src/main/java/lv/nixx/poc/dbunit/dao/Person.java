@@ -14,6 +14,7 @@ public class Person {
     private int id;
     private String name;
     private String surname;
+    private String comment;
     private Collection<Address> addresses = new HashSet<>();
 
     public void addAddress(Address a) {

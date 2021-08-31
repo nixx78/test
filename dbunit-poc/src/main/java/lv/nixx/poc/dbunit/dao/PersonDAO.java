@@ -21,7 +21,7 @@ public class PersonDAO {
     }
 
     public Collection<Person> getAllPersons() {
-        List<Person> query = jdbcTemplate.query("Select p.id, p.name, p.surname, a.id as address_id, a.line" +
+        List<Person> query = jdbcTemplate.query("Select p.id, p.name, p.surname, p.comment, a.id as address_id, a.line" +
                 " from PERSON_TBL p Left join ADDRESS_TBL a on p.id = a.person_id  ", new PMapper());
 
         return new HashSet<>(query);
@@ -40,7 +40,8 @@ public class PersonDAO {
                 person = new Person()
                         .setId(id)
                         .setName(resultSet.getString("name"))
-                        .setSurname(resultSet.getString("surname"));
+                        .setSurname(resultSet.getString("surname"))
+                        .setComment(resultSet.getString("comment"));
                 personMap.put(id, person);
             }
 
