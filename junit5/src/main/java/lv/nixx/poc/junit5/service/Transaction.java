@@ -21,11 +21,15 @@ public class Transaction {
     private BigDecimal amount;
     private Date date;
 
-    public Transaction(String id, String accountId, BigDecimal amount, String date) throws ParseException {
+    public Transaction(String id, String accountId, Double amount, String date) {
         this.id = id;
         this.accountId = accountId;
-        this.amount = amount;
-        this.date = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        this.amount = amount == null ? null : BigDecimal.valueOf(amount);
+        try {
+            this.date = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException("Error creating transaction", e);
+        }
     }
 
     public String getDescription() {
