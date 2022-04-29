@@ -1,6 +1,5 @@
-package lv.nixx.poc.junit5;
+package lv.nixx.poc.assertj;
 
-import lv.nixx.poc.junit5.service.Transaction;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
