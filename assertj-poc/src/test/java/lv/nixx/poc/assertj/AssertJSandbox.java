@@ -50,8 +50,8 @@ class AssertJSandbox {
 
     @Test
     void classAssertion() {
-        Transaction actual = new Transaction("1", "ACC1", 10.01, "01/04/2021");
-        Transaction expected = new Transaction("2", "ACC1", 10.01, "01/04/2021");
+        TransactionDTO actual = new TransactionDTO("1", "ACC1", 10.01, "01/04/2021");
+        TransactionDTO expected = new TransactionDTO("2", "ACC1", 10.01, "01/04/2021");
 
         assertThat(actual)
                 .usingRecursiveComparison()

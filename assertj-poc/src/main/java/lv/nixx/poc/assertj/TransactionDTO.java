@@ -14,14 +14,14 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Transaction {
+public class TransactionDTO {
 
     private String id;
     private String accountId;
     private BigDecimal amount;
     private Date date;
 
-    public Transaction(String id, String accountId, Double amount, String date) {
+    public TransactionDTO(String id, String accountId, Double amount, String date) {
         this.id = id;
         this.accountId = accountId;
         this.amount = amount == null ? null : BigDecimal.valueOf(amount);
