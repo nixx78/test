@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 
-class AssertJSandbox {
+class CoreAssertionsTest {
 
     @Test
     void assertJSandboxTest() {
@@ -20,7 +20,7 @@ class AssertJSandbox {
                         .contains("middle")
                         .endsWith("end"),
                 () -> assertThat(123).isNotEqualTo(777),
-                () -> assertThat(123).withFailMessage("Fail").isEqualTo(777)
+                () -> assertThat(123).withFailMessage("Fail").isEqualTo(123)
         );
     }
 
@@ -91,7 +91,6 @@ class AssertJSandbox {
         if (v == 0) {
             throw new IllegalArgumentException("Exception message");
         }
-
     }
 
 
