@@ -57,6 +57,12 @@ class CoreAssertionsTest {
                 .usingRecursiveComparison()
                 .ignoringFields("id")
                 .isEqualTo(expected);
+
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .comparingOnlyFields("accountId", "amount")
+                .isEqualTo(expected)
+                .getWritableAssertionInfo();
     }
 
     @Test
