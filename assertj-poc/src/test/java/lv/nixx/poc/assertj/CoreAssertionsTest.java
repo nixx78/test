@@ -1,7 +1,10 @@
 package lv.nixx.poc.assertj;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +28,7 @@ class CoreAssertionsTest {
     }
 
     @Test
-    void mapTestSandbox() {
+    void mapTestSandboxTest() {
 
         Map<Integer, String> m = Map.of(
                 1, "One",
@@ -49,7 +52,7 @@ class CoreAssertionsTest {
     }
 
     @Test
-    void classAssertion() {
+    void classAssertionTest() {
         TransactionDTO actual = new TransactionDTO("1", "ACC1", 10.01, "01/04/2021");
         TransactionDTO expected = new TransactionDTO("2", "ACC1", 10.01, "01/04/2021");
 
@@ -66,7 +69,7 @@ class CoreAssertionsTest {
     }
 
     @Test
-    void listSandbox() {
+    void listSandboxTest() {
 
         List<Integer> lst = List.of(
                 1, 2, 3, 4, 5, 6
@@ -81,7 +84,7 @@ class CoreAssertionsTest {
     }
 
     @Test
-    void exceptionSandbox() {
+    void exceptionSandboxTest() {
 
         assertThatThrownBy(() -> this.methodWithException(0))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -91,6 +94,82 @@ class CoreAssertionsTest {
                 .isThrownBy(() -> this.methodWithException(0))
                 .withMessage("Exception message");
 
+    }
+
+    @Test
+    void complexStructureTest() {
+
+        Collection<Payload> actual = List.of(
+                new Payload(
+                        "Action1",
+                        List.of(
+                                Map.of(
+                                        "key1", "value1",
+                                        "key2", "value2"
+                                ),
+                                Map.of(
+                                        "key21", "value21",
+                                        "key22", "value22"
+                                )
+                        )
+                ),
+                new Payload(
+                        "Action2",
+                        List.of(
+                                Map.of(
+                                        "act1", "value1",
+                                        "act2", "value2"
+                                ),
+                                Map.of(
+                                        "act21", "value21",
+                                        "act22", "value22"
+                                )
+                        )
+                )
+
+        );
+
+        Collection<Payload> expected = List.of(
+                new Payload(
+                        "Action1",
+                        List.of(
+                                Map.of(
+                                        "key1", "value1",
+                                        "key2", "value2"
+                                ),
+                                Map.of(
+                                        "key21", "value21",
+                                        "key22", "value22"
+                                )
+                        )
+                ),
+                new Payload(
+                        "Action2",
+                        List.of(
+                                Map.of(
+                                        "act1", "value1",
+                                        "act2", "value2"
+                                ),
+                                Map.of(
+                                        "act21", "value21",
+                                        "act22", "value22"
+                                )
+                        )
+                )
+
+        );
+
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .isEqualTo(expected);
+
+    }
+
+    @AllArgsConstructor
+    @Getter
+    static class Payload {
+        String action;
+        Collection<Map<String, String>> value;
     }
 
     private void methodWithException(int v) {
