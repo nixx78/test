@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -16,14 +17,14 @@ class CoreAssertionsTest {
 
     @Test
     void assertJSandboxTest() {
-
         assertAll(
                 () -> assertThat("Start middle end")
                         .startsWith("Start")
                         .contains("middle")
                         .endsWith("end"),
                 () -> assertThat(123).isNotEqualTo(777),
-                () -> assertThat(123).withFailMessage("Fail").isEqualTo(123)
+                () -> assertThat(123).withFailMessage("Fail").isEqualTo(123),
+                () -> assertThat(BigDecimal.ONE).isEqualByComparingTo(BigDecimal.valueOf(1.0000))
         );
     }
 
