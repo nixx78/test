@@ -6,29 +6,26 @@ import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CSVSourceSampleTest {
 
-    private Calculator calculator = new Calculator();
-    private ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
+    //TODO https://junit.org/junit5/docs/current/user-guide/#overview
+
+    private final Calculator calculator = new Calculator();
 
     @ParameterizedTest(name = "Line:{index} a={0} b={1} expected={2}")
     @CsvSource({
             "1,2,3",
-            "2,2,2+2",
+            "2,2,4",
             "3,4,9"
     })
-    void calculatorAddTest(ArgumentsAccessor argumentsAccessor) throws ScriptException {
+    void calculatorAddTest(ArgumentsAccessor argumentsAccessor) {
         final int a = argumentsAccessor.getInteger(0);
         final int b = argumentsAccessor.getInteger(1);
-        final Integer result = eval(argumentsAccessor.getString(2));
+        final Integer expect = argumentsAccessor.getInteger(2);
 
-        assertEquals("Incorrect result for params, a=" + a + " b=" + b, result, calculator.add(a, b));
+        assertEquals(expect, calculator.add(a, b), "Incorrect result for params, a=" + a + " b=" + b);
     }
 
     @ParameterizedTest(name = "Line:{index} a={0} b={1} expected={2}")
@@ -38,11 +35,7 @@ class CSVSourceSampleTest {
         final int b = argumentsAccessor.getInteger(1);
         final Integer result = argumentsAccessor.getInteger(2);
 
-        assertEquals("Incorrect result for params, a=" + a + " b=" + b, result, calculator.add(a, b));
-    }
-
-    private Integer eval(String expr) throws ScriptException {
-            return (Integer)engine.eval(expr);
+        assertEquals(result, calculator.add(a, b), "Incorrect result for params, a=" + a + " b=" + b);
     }
 
 }

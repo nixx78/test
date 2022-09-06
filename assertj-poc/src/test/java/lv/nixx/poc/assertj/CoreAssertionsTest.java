@@ -166,6 +166,17 @@ class CoreAssertionsTest {
 
     }
 
+    @Test
+    void classAssertWithBigDecimalTest() {
+
+        DtoWithBigDecimal actual = new DtoWithBigDecimal(BigDecimal.valueOf(10.100));
+        DtoWithBigDecimal expected = new DtoWithBigDecimal(BigDecimal.valueOf(10.1));
+
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .isEqualTo(expected);
+    }
+
     @AllArgsConstructor
     @Getter
     static class Payload {
