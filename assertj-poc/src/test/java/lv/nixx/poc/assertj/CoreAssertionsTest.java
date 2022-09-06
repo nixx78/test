@@ -49,6 +49,41 @@ class CoreAssertionsTest {
                         3, "Three"
                 )
         );
+    }
+
+    @Test
+    void collectionOfMapsTest() {
+        List<Map<String, Object>> actualData = List.of(
+                Map.of(
+                        "field11", "value11",
+                        "field12", 100
+                ),
+                Map.of(
+                        "field21", "value21",
+                        "field22", 200
+                ),
+                Map.of(
+                        "field31", "value31",
+                        "field32", 300
+                )
+        );
+
+        List<Map<String, Object>> expectedData = List.of(
+                Map.of(
+                        "field11", "value11",
+                        "field12", 100
+                ),
+                Map.of(
+                        "field21", "value21",
+                        "field22", 200
+                ),
+                Map.of(
+                        "field31", "value31",
+                        "field32", 300
+                )
+        );
+
+        assertThat(actualData).containsAll(expectedData);
 
     }
 
