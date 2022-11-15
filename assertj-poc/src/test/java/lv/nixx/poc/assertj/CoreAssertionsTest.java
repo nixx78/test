@@ -31,10 +31,11 @@ class CoreAssertionsTest {
     @Test
     void mapTestSandboxTest() {
 
-        Map<Integer, String> m = Map.of(
+        Map<Integer, Object> m = Map.of(
                 1, "One",
                 2, "Two",
-                3, "Three"
+                3, "Three",
+                4, BigDecimal.valueOf(1.2)
         );
 
         assertThat(m)
@@ -46,7 +47,8 @@ class CoreAssertionsTest {
                 Map.of(
                         1, "One",
                         2, "Two",
-                        3, "Three"
+                        3, "Three",
+                        4, BigDecimal.valueOf(1.200)
                 )
         );
     }
@@ -56,35 +58,40 @@ class CoreAssertionsTest {
         List<Map<String, Object>> actualData = List.of(
                 Map.of(
                         "field11", "value11",
-                        "field12", 100
+                        "field12", 100,
+                        "field13", BigDecimal.valueOf(1.000)
                 ),
                 Map.of(
                         "field21", "value21",
-                        "field22", 200
+                        "field22", 200,
+                        "field23", BigDecimal.valueOf(2.001)
                 ),
                 Map.of(
                         "field31", "value31",
-                        "field32", 300
+                        "field32", 300,
+                        "field33", BigDecimal.valueOf(3.33)
                 )
         );
 
         List<Map<String, Object>> expectedData = List.of(
                 Map.of(
                         "field11", "value11",
-                        "field12", 100
+                        "field12", 100,
+                        "field13", BigDecimal.valueOf(1.000)
                 ),
                 Map.of(
                         "field21", "value21",
-                        "field22", 200
+                        "field22", 200,
+                        "field23", BigDecimal.valueOf(2.001)
                 ),
                 Map.of(
                         "field31", "value31",
-                        "field32", 300
+                        "field32", 300,
+                        "field33", BigDecimal.valueOf(3.330)
                 )
         );
 
         assertThat(actualData).containsAll(expectedData);
-
     }
 
     @Test
