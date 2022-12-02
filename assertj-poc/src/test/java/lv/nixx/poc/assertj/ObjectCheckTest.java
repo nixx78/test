@@ -5,16 +5,17 @@ import org.assertj.core.api.Condition;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
 import static lv.nixx.poc.assertj.Person.Type.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.in;
-import static org.assertj.core.api.AssertionsForClassTypes.tuple;
-
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 //TODO https://joel-costigliola.github.io/assertj/assertj-core-features-highlight.html
+//TODO  Using a custom comparison strategy in assertions
 
 class ObjectCheckTest {
 
@@ -146,7 +147,51 @@ class ObjectCheckTest {
         });
     }
 
+    @Test
+    void fileCheckTest() {
 
+        File fileWithText = new File("./src/test/resources/text.test.file");
+
+        assertAll(
+                () -> assertThat(fileWithText).exists().isFile().isRelative(),
+                () -> assertThat(contentOf(fileWithText)).startsWith("First line").contains("Text in body: first line").endsWith("EOD")
+        );
+
+    }
+
+    @Test
+    void exceptionHandlingTests() {
+
+        assertAll(
+                () -> assertThatThrownBy(() -> {
+                    throw new Exception("Error happens");
+                }).isInstanceOf(Exception.class)
+                        .hasMessageContaining("Error happens"),
+
+                () -> assertThatExceptionOfType(IOException.class).isThrownBy(() -> {
+                            throw new IOException("IoException message!");
+                        })
+                        .withMessage("%s!", "IoException message")
+                        .withMessageContaining("message")
+                        .withNoCause(),
+
+                () -> assertThatNullPointerException().isThrownBy(() -> {
+                            throw new NullPointerException("NPE");
+                        })
+                        .withMessage("NPE")
+                        .withNoCause(),
+
+                () -> assertThatIllegalStateException().isThrownBy(() -> {
+                            throw new IllegalStateException("NPE", new IllegalArgumentException("Illegal state"));
+                        })
+                        .withMessage("NPE")
+                        .withCause(new IllegalArgumentException("Illegal state")),
+
+                () -> assertThatCode(() -> System.out.println("Code without exceptions")).doesNotThrowAnyException()
+        );
+
+
+    }
 
 
 }
