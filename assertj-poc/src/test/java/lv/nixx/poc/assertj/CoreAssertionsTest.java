@@ -11,6 +11,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class CoreAssertionsTest {
@@ -217,6 +218,11 @@ class CoreAssertionsTest {
         assertThat(actual)
                 .usingRecursiveComparison()
                 .isEqualTo(expected);
+    }
+
+    @Test
+    void allSatisfyTest() {
+        assertThat(List.of("Aa", "Ab", "Ac")).allSatisfy(t -> assertTrue(t.startsWith("A")));
     }
 
     @AllArgsConstructor
