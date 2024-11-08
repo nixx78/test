@@ -2,6 +2,7 @@ package lv.nixx.poc.assertj;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -223,6 +224,17 @@ class CoreAssertionsTest {
     @Test
     void allSatisfyTest() {
         assertThat(List.of("Aa", "Ab", "Ac")).allSatisfy(t -> assertTrue(t.startsWith("A")));
+    }
+
+    @Test
+    void conditionOnCollection() {
+        List<String> actualList = List.of("AXa", "AXb", "AXc");
+
+        assertAll(
+                () -> assertThat(actualList).areNot(new Condition<>(s -> s.contains("Y"), "contain 'X'")),
+                () -> assertThat(actualList).are(new Condition<>(s1 -> s1.contains("X"), "contain 'X'")),
+                () -> assertThat(actualList).is(new Condition<>(s -> s.size() == 3, "contain 'X'"))
+        );
     }
 
     @AllArgsConstructor
